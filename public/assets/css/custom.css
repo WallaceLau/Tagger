@@ -1,0 +1,132 @@
+@charset "UTF-8";
+body {
+    background-color: rgb(237, 239, 242) !important;
+}
+
+.header-style {
+    /*width of your image*/
+    height: 100px;
+    width: 100%;
+    /*height of your image*/
+    background: rgba(26, 179, 148, 0.9)!important;
+    margin: 0;
+    /* If you want no margin */
+    padding: 0;
+    /*if your want to padding */
+}
+
+.header-border-style {
+    border-bottom: 3px solid;
+    border-color: rgba(26, 179, 148, 0.9);
+}
+
+.footer-style {
+    /*width of your image*/
+    height: 30px;
+    /*height of your image*/
+    background: rgba(26, 179, 148, 0.9)!important;
+    margin: 0;
+    /* If you want no margin */
+    padding: 0;
+    /*if your want to padding */
+}
+
+.body-background-color {
+    background: rgb(239, 239, 245)!important;
+}
+
+.header-title {
+    color: white !important;
+}
+
+.footer-description {
+    margin-right: 20px;
+    color: white;
+}
+
+.selector-margin {
+    margin: 25px 0 25px 0;
+}
+
+.selector-style {
+    width: 70% !important;
+}
+
+.result-box-style {
+    border-right-style: solid;
+}
+
+.grid .ibox {
+    margin-bottom: 0 !important;
+    background-color: white !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.grid-item {
+    margin-bottom: 25px !important;
+    width: 300px !important;
+}
+
+.wrapper-padding-bottom {
+    padding-bottom: 20px !important;
+}
+
+.selected-item {
+    border-style: solid;
+    border-color: rgba(26, 179, 148, 0.9);
+    border-width: 3px;
+}
+
+.image-display-section {
+    border-style: solid;
+    border-color: rgba(26, 179, 148, 0.9)!important;
+    border-width: 3px;
+}
+
+.input-box-style {
+    height: 60px !important;
+    width: 98% !important;
+}
+
+.copy-success-toastr-style {
+    z-index: -1;
+    background-color: white !important;
+}
+
+.toast-bottom-right-customized {
+    right: 12px;
+    bottom: 10%;
+}
+
+.toast {
+    opacity: 1 !important;
+}
+
+#right-sidebar.sidebar-open {
+    right: 0 !important;
+    top: 100px !important;
+}
+
+#right-sidebar.sidebar-open.sidebar-top {
+    top: 100px !important;
+    border-top: none !important;
+}
+
+.loading-style {
+    margin-top: 20% !important;
+}
+
+.hidden {
+    z-index: -1;
+    display: none;
+    position: absolute;
+    text-align: center;
+}
+
+.shader {
+    background-color: white;
+    /** change it to this background-color: rgba(0, 0, 0, 0.65) **/
+    position: fixed;
+    opacity: 0.5;
+    /** you can remove this **/
+}
