@@ -10,14 +10,12 @@
 
     <link href='/assets/css/bootstrap.min.css' rel='stylesheet'>
     <link href='/assets/font-awesome/css/font-awesome.css' rel='stylesheet'>
-    <link href='/assets/css/plugins/select2/select2.min.css' rel='stylesheet'>
     <link href='/assets/css/custom.css' rel='stylesheet'>
     <link href='/assets/css/animate.css' rel='stylesheet'>
     <link href='/assets/css/style.css' rel='stylesheet'>
-    <link href='/assets/css/plugins/image-picker/image-picker.css' rel='stylesheet'> 
     <link href='/assets/css/plugins/jQuery-Tags-Input/jquery.tagsinput.min.css' rel='stylesheet'> 
     <link href='/assets/css/plugins/toastr/toastr.min.css' rel='stylesheet'> 
-    <link href='/assets/css/plugins/jquery-loadmask/jquery.loadmask.css' rel='stylesheet'> 
+
     
     @yield('page-head')
 </head>
@@ -82,15 +80,10 @@
 <script src='/assets/js/plugins/metisMenu/jquery.metisMenu.js'></script>
 <script src='/assets/js/plugins/slimscroll/jquery.slimscroll.min.js'></script>
 <script src='/assets/js/inspinia.js'></script>
-<script src='/assets/js/plugins/pace/pace.min.js'></script>
-<script src='/assets/js/plugins/select2/select2.full.min.js'></script>
 <script src='/assets/js/plugins/masonary/masonry.pkgd.min.js'></script>
-<script src='/assets/js/plugins/image-picker/image-picker.min.js'></script>
 <script src='/assets/js/plugins/jQuery-Tags-Input/jquery.tagsinput.min.js'></script>
 <script src='/assets/js/plugins/imagesLoaded/imagesloaded.pkgd.min.js'></script>
 <script src='/assets/js/plugins/toastr/toastr.min.js'></script>
-<script src='/assets/js/plugins/jquery-loadmask/jquery.loadmask.min.js'></script>
-<script src='/assets/js/plugins/spin/spin.min.js'></script>
 
 <script>
     // define 
@@ -101,7 +94,6 @@
 
     //initial plugins
     $('#scroll-area').css('min-height', ($(document).height() * 0.60) + 'px');
-    //$('#tag-area').tagsInput().css('max-width', ($('#tag-section').width()) + 'px');
     $('#tag-area').tagsInput({'width':'90%','height':'500px','defaultText':''});
     $('#keywords').tagsInput({'width':'98%','height':'40px','defaultText':'keywords for your image'});
 
@@ -259,11 +251,8 @@
             type: 'GET',
             dataType: 'JSON'
         }).done(function(data) {
-            //alert(typeof(data.toString()));
-            console.log(data.toString());
             $.each(data, function() {
                 if(!textarea.tagExist(this.toString())){
-                    //console.log(this.toString());
                     textarea.importTags(textarea.val() +","+ this.toString());
                 }
             });
