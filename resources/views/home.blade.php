@@ -8,13 +8,14 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Tagger</title>
 
-    <link  href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet'>
-    <link href='/assets/css/plugins/jQuery-Tags-Input/jquery.tagsinput.min.css' rel='stylesheet'> 
-    <link href='/assets/css/plugins/toastr/toastr.min.css' rel='stylesheet'> 
+    <link href='/assets/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/assets/font-awesome/css/font-awesome.css' rel='stylesheet'>
     <link href='/assets/css/custom.css' rel='stylesheet'>
     <link href='/assets/css/animate.css' rel='stylesheet'>
     <link href='/assets/css/style.css' rel='stylesheet'>
+    <link href='/assets/css/plugins/jQuery-Tags-Input/jquery.tagsinput.min.css' rel='stylesheet'> 
+    <link href='/assets/css/plugins/toastr/toastr.min.css' rel='stylesheet'> 
+
     
     @yield('page-head')
 </head>
@@ -75,15 +76,15 @@
     </div>
 </body>
 @include('components.googleAnalytics')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.1/imagesloaded.pkgd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.2/metisMenu.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.6/jquery.slimscroll.min.js"></script>
+<script src='/assets/js/jquery-2.1.1.js'></script>
+<script src='/assets/js/bootstrap.min.js'></script>
+<script src='/assets/js/plugins/metisMenu/jquery.metisMenu.js'></script>
+<script src='/assets/js/plugins/slimscroll/jquery.slimscroll.min.js'></script>
+<script src='/assets/js/inspinia.js'></script>
+<script src='/assets/js/plugins/masonary/masonry.pkgd.min.js'></script>
 <script src='/assets/js/plugins/jQuery-Tags-Input/jquery.tagsinput.min.js'></script>
+<script src='/assets/js/plugins/imagesLoaded/imagesloaded.pkgd.min.js'></script>
 <script src='/assets/js/plugins/toastr/toastr.min.js'></script>
-<script src='/assets/js/common.js'></script>
 
 <script>
     // define 
@@ -167,6 +168,34 @@
         }else{
             alertToastr(500,2000,'error','No tags found.');
         }
+    }
+
+    function alertToastr(timeout, optionTimeout, toastrType, message){
+        setTimeout(function() {
+            toastr.options = {
+                positionClass: 'toast-top-right',
+                closeButton: true,
+                progressBar: true,
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                timeOut: optionTimeout,
+                escapeHtml: true,
+            };
+            switch(toastrType){
+                case 'success':
+                    toastr.success(message, 'Tagger | <i class="fa fa-tags"></i>');
+                    break;
+                case 'warning':
+                    toastr.warning(message, 'Tagger | <i class="fa fa-tags"></i>');
+                    break;
+                case 'error':
+                    toastr.error(message, 'Tagger | <i class="fa fa-tags"></i>');
+                    break;
+                default:
+                    toastr.info(message, 'Tagger | <i class="fa fa-tags"></i>');
+                    break;
+            }
+        }, timeout);
     }
  
     function copyToClipboard(element) {
