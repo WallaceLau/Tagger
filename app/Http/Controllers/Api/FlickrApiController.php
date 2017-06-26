@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HttpRequest\HttpRequestController;
 use Illuminate\Http\Request;
-use Cache;
-use Log;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class FlickrApiController extends Controller
 {
@@ -28,10 +26,6 @@ class FlickrApiController extends Controller
         });
         //Log::info('FlickrApiController::handleFlickrRequest() retrivied value: '.json_encode($value));
         return $this->checkRequestStatus($value);
-    }
-
-    public function handleOtherRequest($url, $methodType, $json){
-        return $this->requestHandler->doRequest($url, $methodType, ['json' => $json]);
     }
 
     public function checkRequestStatus($arraizedResult){
@@ -94,10 +88,10 @@ class FlickrApiController extends Controller
     public function searchTags($keywords){
         $url = env('FLICKR_BASE_URL').'?method='.env('FLICKR_SEARCH_METHOD').'&api_key='.env('FLICKR_API_KEY').'&tags='.$keywords.'&format='.env('FLICKR_RESPONSE_FORMAT').'&'.env('FLICKR_ENABLE_JSONCALLBACK').
         //'&license='.env('FLICKR_LICENSE').
-        '&tag_mode='.env('FLICKR_TAG_MODE').'&per_page='.env('FLICKR_PER_PAGE').'&page='.env('FLICKR_PAGE');        
+        '&tag_mode='.env('FLICKR_TAG_MODE').'&per_page='.env('FLICKR_PER_PAGE').'&page='.env('FLICKR_PAGE');
         Log::info('FlickrApiController::searchTags() request URL: '.$url);
 
-        $arraizedResult = $this->handleFlickrRequest('GET', $url, $keywords);   
+        $arraizedResult = $this->handleFlickrRequest('GET', $url, $keywords);
         $resultSets = array();
         foreach($arraizedResult['photos']['photo'] as $element){
             (string) $url = $this->constructImageUrl($element['farm'], $element['server'], $element['id'], $element['secret']);
@@ -114,8 +108,8 @@ class FlickrApiController extends Controller
         $url = env('FLICKR_BASE_URL').'?method='.env('FLICKR_GETINFO_METHOD').'&api_key='.env('FLICKR_API_KEY').'&photo_id='.$photoId.'&format='.env('FLICKR_RESPONSE_FORMAT').'&'.env('FLICKR_ENABLE_JSONCALLBACK');
         Log::info('FlickrApiController::getPhotoInfo() request URL: '.$url);
 
-        $arraizedResult = $this->handleFlickrRequest('GET', $url, $photoId);  
-        Log::info('FlickrApiController::getPhotoInfo()------  photo owner: https://www.flickr.com/photos/'.$arraizedResult['photo']['owner']['nsid']); 
+        $arraizedResult = $this->handleFlickrRequest('GET', $url, $photoId);
+        Log::info('FlickrApiController::getPhotoInfo()------  photo owner: https://www.flickr.com/photos/'.$arraizedResult['photo']['owner']['nsid']);
         $tagSets = array();
         foreach($arraizedResult['photo']['tags']['tag'] as $element){
             (string) $tag = $element['raw'];

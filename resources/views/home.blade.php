@@ -195,7 +195,7 @@
     function getImages(){
         if($('#keywords').val().trim().length > 0){
             $.ajax({
-                    url: '/' + $('#keywords').val(),
+                    url: '/search/' + $('#keywords').val(),
                     type: 'GET',
                     dataType: 'JSON'
                 }).done(function(data) {
@@ -203,12 +203,10 @@
                     $.each(data, function() {
                         items += "<div class='grid-item' data-photo-id="+JSON.stringify(this[1])+"><div class='ibox'><div class='ibox-content'><img alt='image' class='img-responsive' src="+JSON.stringify(this[0])+"></div></div></div>";
                     });
-                    allElements = $(items).filter(".grid-item");   
-                    grid.append(allElements).imagesLoaded(function(){
-                        grid.masonry( 'appended', allElements, true );
-                        loading.toggleClass('hidden');
-                        scrollArea.toggleClass('shader');
-                    }); 
+                    grid.masonryImagesReveal($(items));
+                    loading.toggleClass('hidden');
+                    scrollArea.toggleClass('shader');
+                    
                 }).fail(function(jqXHR, textStatus) {
                     alertToastr(500,3000,'error','Service down! Request failed: ' + textStatus);
                 });
@@ -220,7 +218,7 @@
     // get image contents after selection
     function getImageContents(photoId){
         $.ajax({
-            url: '/' + photoId,
+            url: '/getPhotoInfo/' + photoId,
             type: 'GET',
             dataType: 'JSON'
         }).done(function(data) {
@@ -233,6 +231,26 @@
             alert("Request failed: " + textStatus);
         });
     }
+
+    $.fn.masonryImagesReveal = function($items) {
+        var msnry = this.data('masonry');
+        var itemSelector = msnry.options.itemSelector;
+        // hide by default
+        $items.hide();
+        // append to container
+        this.append($items);
+        $items.imagesLoaded().progress(function(imgLoad, image) {
+            // get item
+            // image is imagesLoaded class, not <img>, <img> is image.img
+            var $item = $(image.img).parents(itemSelector);
+            // un-hide item
+            $item.show();
+            // masonry does its thing
+            msnry.appended($item);
+        });
+
+        return this;
+    };
 </script>
 @yield('page-scripts')
 
