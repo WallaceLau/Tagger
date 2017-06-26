@@ -195,7 +195,7 @@
     function getImages(){
         if($('#keywords').val().trim().length > 0){
             $.ajax({
-                    url: '/search/' + $('#keywords').val(),
+                    url: '/' + $('#keywords').val(),
                     type: 'GET',
                     dataType: 'JSON'
                 }).done(function(data) {
@@ -205,9 +205,9 @@
                     });
                     allElements = $(items).filter(".grid-item");   
                     grid.append(allElements).imagesLoaded(function(){
-                    grid.masonry( 'appended', allElements, true );
-                    loading.toggleClass('hidden');
-                    scrollArea.toggleClass('shader');
+                        grid.masonry( 'appended', allElements, true );
+                        loading.toggleClass('hidden');
+                        scrollArea.toggleClass('shader');
                     }); 
                 }).fail(function(jqXHR, textStatus) {
                     alertToastr(500,3000,'error','Service down! Request failed: ' + textStatus);
@@ -220,7 +220,7 @@
     // get image contents after selection
     function getImageContents(photoId){
         $.ajax({
-            url: '/getPhotoInfo/' + photoId,
+            url: '/' + photoId,
             type: 'GET',
             dataType: 'JSON'
         }).done(function(data) {

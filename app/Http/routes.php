@@ -12,8 +12,26 @@
 */
 
 Route::get('/', 'Web\WebController@showHomePage')->name('home');
-Route::get('/search/{keywords}', 'Api\FlickrApiController@searchTags');
-Route::get('/getPhotoInfo/{photoId}', 'Api\FlickrApiController@getPhotoInfo');
+Route::get('/{keywords}', 'Api\FlickrApiController@searchTags');
+Route::get('/{photoId}', 'Api\FlickrApiController@getPhotoInfo')->where('photoId','[0-9]+');
+
+Route::get('/show/{id}', 'Db\DbController@show')->name('showRecords')->where('id','[0-9]+');
+Route::get('/insert/{name}', 'Db\DbController@insert')->name('insertRecords')->where('name','[A-Za-z]+');
+Route::get('/update/{id}/{name}','Db\DbController@update')->name('updateRecords')->where('name','[A-Za-z]+')->where('id','[0-9]+');
+Route::get('/delete/{id}','Db\DbController@delete')->name('deleteRecords')->where('id','[0-9]+');
+
+Route::get('/listAll/{tableName}','Db\DbController@listAll')->name('listAll')->where('name','[A-Za-z]+');
+
+Route::get('/email/testing','Email\EmailController@sendNotification')->name('sendTestingEmail');
+
+Route::get("/email/show", function(){
+   return View::make("emails.notification");
+});
+
+Route::get('/sendTestingRequest/testing','Api\FlickrApiController@testing');
+
+
+//Route::get('/insertWfError/yes','Db\DbController@insertWfError')->name('insertWfError');
 
 /*
 |--------------------------------------------------------------------------
